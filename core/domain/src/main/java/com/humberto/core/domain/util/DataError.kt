@@ -1,7 +1,6 @@
 package com.humberto.core.domain.util
 
 sealed interface DataError: Error {
-
     enum class Network: DataError {
         REQUEST_TIMEOUT,
         UNAUTHORIZED,
