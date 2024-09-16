@@ -108,7 +108,7 @@ fun RegisterScreen(
                     }
                 }
             )
-            Spacer(modifier = Modifier.width(48.dp))
+            Spacer(modifier = Modifier.height(48.dp))
             RuniqueTextField(
                 state = state.email,
                 startIcon = EmailIcon,
