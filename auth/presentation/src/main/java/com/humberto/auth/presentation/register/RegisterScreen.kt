@@ -45,8 +45,8 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun RegisterScreenRoot(
-    OnSignInClick: () -> Unit,
-    OnSignUpClick: () -> Unit,
+    onSignInClick: () -> Unit,
+    onSuccessfulRegistration: () -> Unit,
     viewModel: RegisterViewModel = koinViewModel()
 ) {
     RegisterScreen(
@@ -123,7 +123,7 @@ fun RegisterScreen(
             )
             Spacer(modifier = Modifier.height(16.dp))
             RuniquePasswordTextField(
-                state = state.email,
+                state = state.password,
                 isPasswordVisible = state.isPasswordVisible,
                 onTogglePasswordVisibility = {
                     onAction(RegisterAction.OnTogglePasswordVisibilityClick)
