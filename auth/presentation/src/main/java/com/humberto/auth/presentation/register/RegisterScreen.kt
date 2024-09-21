@@ -37,7 +37,6 @@ import com.humberto.core.presentation.designsystem.CrossIcon
 import com.humberto.core.presentation.designsystem.EmailIcon
 import com.humberto.core.presentation.designsystem.Poppins
 import com.humberto.core.presentation.designsystem.RuniqueDarkRed
-import com.humberto.core.presentation.designsystem.RuniqueGray
 import com.humberto.core.presentation.designsystem.RuniqueGreen
 import com.humberto.core.presentation.designsystem.RuniqueTheme
 import com.humberto.core.presentation.designsystem.components.GradientBackground
@@ -79,7 +78,13 @@ fun RegisterScreenRoot(
 
     RegisterScreen(
         state = viewModel.state,
-        onAction = viewModel::onAction
+        onAction = { action ->
+            when(action) {
+                is RegisterAction.OnLoginClick -> onSignInClick()
+                else -> Unit
+            }
+            viewModel.onAction(action)
+        }
     )
 }
 
@@ -105,7 +110,7 @@ fun RegisterScreen(
                 withStyle(
                     style = SpanStyle(
                         fontFamily = Poppins,
-                        color = RuniqueGray
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 ) {
                     append(stringResource(id = R.string.already_have_an_account) + " ")
