@@ -9,6 +9,7 @@ import androidx.navigation.compose.navigation
 import com.humberto.auth.presentation.intro.IntroScreenRoot
 import com.humberto.auth.presentation.login.LoginScreenRot
 import com.humberto.auth.presentation.register.RegisterScreenRoot
+import com.humberto.run.presentation.active_run.ActiveRunScreenRoot
 import com.humberto.run.presentation.run_overview.RunOverviewScreenRoot
 
 @Composable
@@ -85,7 +86,14 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
         route = "run"
     ) {
         composable("run_overview") {
-            RunOverviewScreenRoot()
+            RunOverviewScreenRoot(
+                onStartRunClick = {
+                    navController.navigate("active_run")
+                }
+            )
+        }
+        composable("active_run") {
+            ActiveRunScreenRoot()
         }
     }
 }
