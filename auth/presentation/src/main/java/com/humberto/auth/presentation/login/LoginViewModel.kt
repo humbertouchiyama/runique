@@ -14,8 +14,8 @@ import com.humberto.core.domain.util.Result
 import com.humberto.core.presentation.ui.UiText
 import com.humberto.core.presentation.ui.asUiText
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
@@ -46,7 +46,7 @@ class LoginViewModel(
             state = state.copy(
                 canLogin = isValidEmail && password.isNotEmpty(),
             )
-        }.collectLatest { }
+        }.launchIn(viewModelScope)
     }
 
     fun onAction(action: LoginAction) {

@@ -7,7 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.humberto.auth.presentation.intro.IntroScreenRoot
-import com.humberto.auth.presentation.login.LoginScreenRot
+import com.humberto.auth.presentation.login.LoginScreenRoot
 import com.humberto.auth.presentation.register.RegisterScreenRoot
 import com.humberto.run.presentation.active_run.ActiveRunScreenRoot
 import com.humberto.run.presentation.run_overview.RunOverviewScreenRoot
@@ -58,7 +58,7 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
             )
         }
         composable("login") {
-            LoginScreenRot(
+            LoginScreenRoot(
                 onLoginSuccess = {
                     navController.navigate("run") {
                         popUpTo("auth") {
