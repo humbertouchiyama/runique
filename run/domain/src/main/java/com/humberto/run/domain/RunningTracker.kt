@@ -54,7 +54,7 @@ class RunningTracker(
                 } else flowOf()
             }
             .onEach {
-                _elapsedTime.value +- it
+                _elapsedTime.value += it
             }
             .launchIn(applicationScope)
 
