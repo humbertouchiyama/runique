@@ -34,6 +34,7 @@ import com.humberto.core.presentation.designsystem.components.RuniqueScaffold
 import com.humberto.core.presentation.designsystem.components.RuniqueToolbar
 import com.humberto.run.presentation.R
 import com.humberto.run.presentation.active_run.components.RunDataCard
+import com.humberto.run.presentation.active_run.service.ActiveRunService
 import com.humberto.run.presentation.maps.TrackerMap
 import com.humberto.run.presentation.util.hasLocationPermission
 import com.humberto.run.presentation.util.hasNotificationPermission
@@ -43,17 +44,20 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ActiveRunScreenRoot(
+    onServiceToggle: (isServiceRunning: Boolean) -> Unit,
     viewModel: ActiveRunViewModel = koinViewModel()
 ) {
     ActiveRunScreen(
         state = viewModel.state,
-        onAction = viewModel::onAction
+        onServiceToggle = onServiceToggle,
+        onAction = viewModel::onAction,
     )
 }
 
 @Composable
 private fun ActiveRunScreen(
     state: ActiveRunState,
+    onServiceToggle: (isServiceRunning: Boolean) -> Unit,
     onAction: (ActiveRunAction) -> Unit
 ) {
     val context = LocalContext.current
@@ -104,6 +108,18 @@ private fun ActiveRunScreen(
 
         if (!showLocationRationale && !showNotificationRationale) {
             permissionLauncher.requestRuniquePermissions(context)
+        }
+    }
+
+    LaunchedEffect(key1 = state.isRunFinished) {
+        if(state.isRunFinished) {
+            onServiceToggle(false)
+        }
+    }
+
+    LaunchedEffect(key1 = state.shouldTrack) {
+        if(context.hasLocationPermission() && state.shouldTrack && !ActiveRunService.isServiceActive) {
+            onServiceToggle(true)
         }
     }
 
@@ -249,6 +265,7 @@ private fun ActiveRunScreenPreview() {
     RuniqueTheme {
         ActiveRunScreen(
             state = ActiveRunState(),
+            onServiceToggle = { },
             onAction = {}
         )
     }

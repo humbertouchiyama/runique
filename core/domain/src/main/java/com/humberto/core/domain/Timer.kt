@@ -11,7 +11,7 @@ object Timer {
         return flow {
             var lastEmitTime = System.currentTimeMillis()
             while(true) {
-                kotlinx.coroutines.delay(200L)
+                kotlinx.coroutines.delay(500L)
                 val currentTime = System.currentTimeMillis()
                 val elapsedTime = currentTime - lastEmitTime
                 emit(elapsedTime.milliseconds)
