@@ -1,6 +1,8 @@
 package com.humberto.runique
 
 import android.app.Application
+import android.content.Context
+import com.google.android.play.core.splitcompat.SplitCompat
 import com.humberto.auth.data.di.authDataModule
 import com.humberto.auth.presentation.di.authViewModuleModule
 import com.humberto.core.data.networking.di.coreDataModule
@@ -44,5 +46,10 @@ class RuniqueApp: Application() {
                 runDataModule
             )
         }
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        SplitCompat.install(this)
     }
 }
