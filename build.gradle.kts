@@ -9,5 +9,6 @@ plugins {
     alias(libs.plugins.orgJetbrainsKotlinJvm) apply false
     alias(libs.plugins.androidDynamicFeature) apply false
     alias(libs.plugins.mapsplatformSecretsPlugin) apply false
+    alias(libs.plugins.junit5) apply false
 }
 
