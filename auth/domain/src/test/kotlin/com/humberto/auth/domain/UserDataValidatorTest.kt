@@ -11,7 +11,7 @@ class UserDataValidatorTest {
     private lateinit var userDataValidator: UserDataValidator
 
     @BeforeEach
-    fun setup() {
+    fun setUp() {
         userDataValidator = UserDataValidator(
             patternValidator = object : PatternValidator {
                 override fun matches(value: String): Boolean {
