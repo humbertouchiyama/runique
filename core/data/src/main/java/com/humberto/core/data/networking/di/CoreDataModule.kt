@@ -5,13 +5,14 @@ import com.humberto.core.data.networking.auth.EncryptedSessionStorage
 import com.humberto.core.data.run.OfflineFirstRunRepository
 import com.humberto.core.domain.run.RunRepository
 import com.humberto.core.domain.util.SessionStorage
+import io.ktor.client.engine.cio.CIO
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val coreDataModule = module {
     single {
-        HttpClientFactory(get()).build()
+        HttpClientFactory(get()).build(CIO.create())
     }
     singleOf(::EncryptedSessionStorage).bind<SessionStorage>()
     singleOf(::OfflineFirstRunRepository).bind<RunRepository>()
